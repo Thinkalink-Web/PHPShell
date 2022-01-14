@@ -10,12 +10,26 @@ if (PHPSHELL_ENABLED !== true) {
   die("PHPShell is not enabled. Please enable PHPShell and try again.");
 }
 
-if ($_SESSION["loggedin"] === true) {
-  // User is signed in, show a shell
+if ($_SESSION["PHPSHELL"] === true) {
+  // User is signed in
   SHOW_SHELL_HTML();
 } else {
-  // User is not signed in, show a login screen
-  SHOW_LOGIN_HTML();
+  if (isset($_POST["btn"]) and isset($_POST["data"])) {
+    // This is an API request to sign in
+    $data = $_POST["data"];
+    LOGIN_USER($data);
+  } else {
+    // User is not signed in
+    SHOW_LOGIN_HTML();
+  }
+}
+
+function LOGIN_USER($data) {
+  if (empty($data)) {
+    // User did not type a password
+    // Give an error message
+    header("Location: ");
+  }
 }
 
 function SHOW_SHELL_HTML() {
