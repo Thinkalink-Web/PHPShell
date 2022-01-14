@@ -34,7 +34,7 @@ function LOGIN_USER_API($data) {
   
   if (password_verify($data, PHPSHELL_PASSWORD)) {
     // Valid password
-    echo 'ok';
+    echo 'yes';
   } else {
     echo 'no';
   }
