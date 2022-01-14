@@ -28,7 +28,8 @@ function LOGIN_USER($data) {
   if (empty($data)) {
     // User did not type a password
     // Give an error message
-    header("Location: ");
+    header("Location: ".basename(__FILE__)."?error=emptyPassword");
+    exit();
   }
 }
 
@@ -57,6 +58,13 @@ function SHOW_LOGIN_HTML() {
       <title>PHPShell</title>
     </head>
     <body>
+      <?php
+      // Show error message
+      $error = $_GET["error"];
+      if ($error === "emptyPassword") {
+        echo("<p>Please type a password</p>");
+      }
+      ?>
       <form method="post">
         <input type="password" name="data" placeholder="Password">
         <input type="button" name="btn" value="Sign in">
