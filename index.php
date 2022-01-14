@@ -17,14 +17,14 @@ if ($_SESSION["PHPSHELL"] === true) {
   if (isset($_POST["btn"]) and isset($_POST["data"])) {
     // This is an API request to sign in
     $data = $_POST["data"];
-    LOGIN_USER($data);
+    LOGIN_USER_API($data);
   } else {
     // User is not signed in
     SHOW_LOGIN_HTML();
   }
 }
 
-function LOGIN_USER($data) {
+function LOGIN_USER_API($data) {
   if (empty($data)) {
     // User did not type a password
     // Give an error message
