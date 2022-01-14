@@ -28,7 +28,7 @@ function LOGIN_USER_API($data) {
   if (empty($data)) {
     // User did not type a password
     // Give an error message
-    header("Location: ".basename(__FILE__)."?error=emptyPassword");
+    header("Location: ".basename(__FILE__)."?error=empty");
     exit();
   }
   
@@ -36,7 +36,8 @@ function LOGIN_USER_API($data) {
     // Valid password
     echo 'yes';
   } else {
-    echo 'no';
+    // Incorrect password
+    header("Location: ".basename(__FILE__)."?error=password");
   }
 }
 
@@ -68,8 +69,10 @@ function SHOW_LOGIN_HTML() {
       <?php
       // Show error message
       $error = $_GET["error"];
-      if ($error === "emptyPassword") {
-        echo("<p>No password specified</p>");
+      if ($error === "empty") {
+        echo("<p>Incorrect password</p>");
+      } elseif ($error === "password") {
+        echo("<p>Incorrect password</p>");
       }
       ?>
       <form method="post">
