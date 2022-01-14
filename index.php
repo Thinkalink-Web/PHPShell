@@ -69,7 +69,7 @@ function SHOW_LOGIN_HTML() {
       // Show error message
       $error = $_GET["error"];
       if ($error === "emptyPassword") {
-        echo("<p>Please type a password</p>");
+        echo("<p>No password specified</p>");
       }
       ?>
       <form method="post">
