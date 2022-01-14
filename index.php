@@ -31,6 +31,13 @@ function LOGIN_USER_API($data) {
     header("Location: ".basename(__FILE__)."?error=emptyPassword");
     exit();
   }
+  
+  if (password_verify($data, PHPSHELL_PASSWORD)) {
+    // Valid password
+    echo 'ok';
+  } else {
+    echo 'no';
+  }
 }
 
 function SHOW_SHELL_HTML() {
