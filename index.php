@@ -68,6 +68,7 @@ function SHOW_LOGIN_HTML() {
       <form method="post">
         <input type="password" name="data" placeholder="Password">
         <input type="button" name="btn" value="Sign in">
+      </form>
     </body>
   </html>
   <?php
