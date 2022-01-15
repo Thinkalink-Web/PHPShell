@@ -13,6 +13,8 @@ After you have changed the default password, change PHPSHELL_ENABLED to true to 
 # Done
 You're all set!
 
+Run the exit command to sign out.
+
 1. Docs are coming soon!
 2. Feel free to open a pull request.
 3. Feel free to open an issue.
