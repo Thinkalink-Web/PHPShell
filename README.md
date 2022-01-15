@@ -19,6 +19,6 @@ You're all set!
 # Notes
 -PHPShell runs as the user PHP runs as, which is usually an unprivileged user without sudo access.
 
--Certain commands like nano do not work because they require an actual Linux shell running that doesn't close immediately.
+-Certain commands like nano do not work because they require an actual Linux shell running.
 
 -Every time you run another command, a new Linux shell starts. So, cd only works like this: cd /path && pwd.
