@@ -45,6 +45,10 @@ function EXECUTE_COMMAND_API($data) {
     // If the user runs exit,
     // Sign them out
     LOGOUT_USER_API();
+  } elseif (empty($data)) {
+    // Redirecting the user
+    header("Location: ".basename(__FILE__));
+    exit();
   }
   
   $output = shell_exec($data);
