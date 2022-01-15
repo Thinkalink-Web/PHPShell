@@ -2,6 +2,7 @@
 
 // [PHPSHELL]
 
+// Starting session
 session_start();
 
 // Loading configuration
@@ -47,6 +48,9 @@ function EXECUTE_COMMAND_API($data) {
     // Maybe error?
     $output = "The program produced no output";
   }
+  
+  $urlOutput = urlencode($output);
+  header("Location: ".basename(__FILE__)."?output=".$urlOutput);
 }
 
 function LOGIN_USER_API($data) {
