@@ -9,6 +9,7 @@ session_start();
 require_once("config.php");
 
 // Checking if PHPShell is enabled
+// And throwing an error if not enabled
 if (PHPSHELL_ENABLED !== true) {
   die("PHPShell is not enabled. Please enable PHPShell and try again.");
 }
@@ -17,8 +18,7 @@ if ($_SESSION["PHPSHELL"] === true) {
   // The user is logged in
   if ($_GET["logout"] === "1") {
     // This is an API request to sign out
-    session_unset();
-    session_destroy();
+    LOGOUT_USER_API();
   } elseif (isset($_POST["btn"]) and isset($_POST["data"])) {
     // This is an API request to execute a command
     $data = $_POST["data"];
@@ -55,15 +55,25 @@ function EXECUTE_COMMAND_API($data) {
   // URL-encode output
   $urlOutput = urlencode($output);
   
-  // Redirect user
+  // Redirecting the user with output
   header("Location: ".basename(__FILE__)."?output=".$urlOutput);
+  exit();
+}
+
+function LOGOUT_USER_API() {
+  // Signing out a user
+  session_unset();
+  session_destroy();
+  
+  // Redirecting the user
+  header("Location: ".basename(__FILE__));
   exit();
 }
 
 function LOGIN_USER_API($data) {
   if (empty($data)) {
     // User did not type a password
-    // Give an error message
+    // Redirect user with error message
     header("Location: ".basename(__FILE__)."?error=password");
     exit();
   }
@@ -71,10 +81,13 @@ function LOGIN_USER_API($data) {
   if (password_verify($data, PHPSHELL_PASSWORD)) {
     // Valid password
     $_SESSION["PHPSHELL"] = true;
+    
+    // Redirecting the user
     header("Location: ".basename(__FILE__));
     exit();
   } else {
-    // Incorrect password
+    // Invalid password;
+    // Redirect user with error message
     header("Location: ".basename(__FILE__)."?error=password");
     exit();
   }
