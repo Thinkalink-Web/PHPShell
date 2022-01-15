@@ -14,6 +14,7 @@ if (PHPSHELL_ENABLED !== true) {
 }
 
 if ($_SESSION["PHPSHELL"] === true) {
+  // The user is logged in
   if ($_GET["logout"] === "1") {
     // This is an API request to sign out
     session_unset();
@@ -23,16 +24,17 @@ if ($_SESSION["PHPSHELL"] === true) {
     $data = $_POST["data"];
     EXECUTE_COMMAND_API($data);
   } else {
-    // User is signed in
+    // Not an API request, show HTML
     SHOW_SHELL_HTML();
   }
 } else {
+  // The user is not logged in
   if (isset($_POST["btn"]) and isset($_POST["data"])) {
     // This is an API request to sign in
     $data = $_POST["data"];
     LOGIN_USER_API($data);
   } else {
-    // User is not signed in
+    // Not an API request, show HTML
     SHOW_LOGIN_HTML();
   }
 }
@@ -40,17 +42,22 @@ if ($_SESSION["PHPSHELL"] === true) {
 // [FUNCTIONS]
 
 function EXECUTE_COMMAND_API($data) {
+  // Execute command
   $output = shell_exec($data);
   if ($output === false) {
-    // Error
+    // Error establishing pipe connection
     $output = "An error occurred";
   } elseif ($output === null) {
     // Maybe error?
     $output = "The program produced no output";
   }
   
+  // URL-encode output
   $urlOutput = urlencode($output);
+  
+  // Redirect user
   header("Location: ".basename(__FILE__)."?output=".$urlOutput);
+  exit();
 }
 
 function LOGIN_USER_API($data) {
