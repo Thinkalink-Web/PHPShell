@@ -143,6 +143,11 @@ function SHOW_LOGIN_HTML() {
   <html>
     <head>
       <title>PHPShell</title>
+      <?php
+      if (!empty(PHPSHELL_FAVICON)) {
+        echo '<link rel="shortcut icon" type="image/jpg" href="'.PHPSHELL_FAVICON.'"/>';
+      }
+      ?>
     </head>
     <body>
       <?php
