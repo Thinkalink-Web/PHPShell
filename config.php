@@ -9,4 +9,7 @@ define("PHPSHELL_ENABLED", false);
 // Please change this password before enabling PHPShell
 define("PHPSHELL_PASSWORD", password_hash("phpshell", PASSWORD_DEFAULT));
 
+// Optional favicon for PHPShell
+define("PHPSHELL_FAVICON", "");
+
 // Thanks for using PHPShell!
