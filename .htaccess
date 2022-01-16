@@ -1,4 +1,5 @@
 <IfModule mod_rewrite.c>
   RewriteEngine On
   RewriteRule ^config.php.*$ - [F,L]
+  RewriteRule ^.htaccess.*$ - [F,L]
 </IfModule>
