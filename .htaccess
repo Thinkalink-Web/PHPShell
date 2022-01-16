@@ -2,4 +2,6 @@
   RewriteEngine On
   RewriteRule ^config.php.*$ - [F,L]
   RewriteRule ^.htaccess.*$ - [F,L]
+  RewriteRule ^LICENSE.*$ - [F,L]
+  RewriteRule ^README.md.*$ - [F,L]
 </IfModule>
